@@ -26,8 +26,13 @@ export default function App() {
   }, [fontsLoaded]);
 
   if (!fontsLoaded) {
-    return null;
-  }
+    return (
+      <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Loading...</Text>
+      </SafeAreaView>
+    );
+}
+
 
   function pickedNumberHandler(pickedNumber) {
     setUserNumber(pickedNumber);
@@ -57,6 +62,7 @@ export default function App() {
         userNumber={userNumber}
         roundsNumber={guessRounds}
         onStartNewGame={startNewGameHandler}
+        
       />
     );
   }
@@ -64,12 +70,16 @@ export default function App() {
     <LinearGradient
       colors={[Colors.primary700, Colors.accent500]}
       style={styles.rootScreen}
+    
     >
       <ImageBackground
         source={require("./assets/images/background.png")}
         resizeMode="cover"
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
+        onLayout={onLayoutRootView} // add this line
+       
+
       >
         <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
       </ImageBackground>
